@@ -2,6 +2,9 @@ import curses
 import time
 import sys
 
+ESCAPE = 27
+BACKSPACE = 127
+
 def main(stdscr):
     stdscr.addstr(0, 0, "Welcome to Typing Test! Press q to quit.")
     stdscr.move(1, 0)
@@ -12,9 +15,9 @@ def main(stdscr):
         except KeyboardInterrupt:
             sys.exit()
 
-        if key == ord('q'):
+        if key == ord('q') or key == ESCAPE:
             break
-        elif key == 127: # backspace key
+        elif key == BACKSPACE:
             y, x = stdscr.getyx()
             if x > 0:
                 stdscr.delch(y, x-1)
