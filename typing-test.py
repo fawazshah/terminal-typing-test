@@ -6,7 +6,7 @@ ESCAPE = 27
 BACKSPACE = 127
 
 def main(stdscr):
-    stdscr.addstr(0, 0, "Welcome to Typing Test! Press q to quit.")
+    stdscr.addstr(0, 0, "Welcome to Typing Test! Press Ctrl-C to quit.")
     stdscr.move(1, 0)
 
     while True:
@@ -15,7 +15,7 @@ def main(stdscr):
         except KeyboardInterrupt:
             sys.exit()
 
-        if key == ord('q') or key == ESCAPE:
+        if key == ESCAPE:
             break
         elif key == BACKSPACE:
             y, x = stdscr.getyx()
