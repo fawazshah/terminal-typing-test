@@ -14,8 +14,9 @@ def main(stdscr):
     stdscr.move(2, 0)
 
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_GREEN)
+    curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_RED)
 
-    current_char = 0
+    curr_char_idx = 0
 
     while True:
         try:
@@ -32,13 +33,23 @@ def main(stdscr):
         else:
             y, x = stdscr.getyx()
 
-            stdscr.attron(curses.color_pair(1))
-            stdscr.addstr(y, x, TEST_STRING[current_char])
-            stdscr.attroff(curses.color_pair(1))
+            if curr_char_idx < TEST_STRING_LENGTH - 1:
+
+                if key == ord(TEST_STRING[curr_char_idx]):
+                    stdscr.attron(curses.color_pair(1))
+                    stdscr.addstr(y, x, TEST_STRING[curr_char_idx])
+                    stdscr.attroff(curses.color_pair(1))
+                else:
+                    stdscr.attron(curses.color_pair(2))
+                    stdscr.addstr(y, x, TEST_STRING[curr_char_idx])
+                    stdscr.attroff(curses.color_pair(2))
+
+            else:
+                sys.exit()
 
 
-            current_char += 1
-            stdscr.move(2, current_char)
+            curr_char_idx += 1
+            stdscr.move(2, curr_char_idx)
 
 
 curses.wrapper(main)
