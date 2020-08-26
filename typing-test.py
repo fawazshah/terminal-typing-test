@@ -5,6 +5,9 @@ import sys
 ESCAPE = 27
 BACKSPACE = 127
 
+CORRECT_COLOUR = 1
+ERROR_COLOUR = 2
+
 TEST_STRING = "Type these words"
 TEST_STRING_LENGTH = len(TEST_STRING)
 
@@ -13,8 +16,8 @@ def main(stdscr):
     stdscr.addstr(2, 0, TEST_STRING)
     stdscr.move(2, 0)
 
-    curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_GREEN)
-    curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_RED)
+    curses.init_pair(CORRECT_COLOUR, curses.COLOR_BLACK, curses.COLOR_GREEN)
+    curses.init_pair(ERROR_COLOUR, curses.COLOR_BLACK, curses.COLOR_RED)
 
     curr_char_idx = 0
 
@@ -34,16 +37,10 @@ def main(stdscr):
             y, x = stdscr.getyx()
 
             if curr_char_idx < TEST_STRING_LENGTH - 1:
-
-                if key == ord(TEST_STRING[curr_char_idx]):
-                    stdscr.attron(curses.color_pair(1))
-                    stdscr.addstr(y, x, TEST_STRING[curr_char_idx])
-                    stdscr.attroff(curses.color_pair(1))
-                else:
-                    stdscr.attron(curses.color_pair(2))
-                    stdscr.addstr(y, x, TEST_STRING[curr_char_idx])
-                    stdscr.attroff(curses.color_pair(2))
-
+                colour_profile = CORRECT_COLOUR if key == ord(TEST_STRING[curr_char_idx]) else ERROR_COLOUR
+                stdscr.attron(curses.color_pair(colour_profile))
+                stdscr.addstr(y, x, TEST_STRING[curr_char_idx])
+                stdscr.attroff(curses.color_pair(colour_profile))
             else:
                 sys.exit()
 
