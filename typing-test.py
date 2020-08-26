@@ -35,15 +35,15 @@ def main(stdscr):
             if x > 0:
                 stdscr.delch(y, x - 1)
         else:
-            y, x = stdscr.getyx()
-
-            if curr_char_idx < TEST_STRING_LENGTH - 1:
-                colour_profile = CORRECT_COLOUR if key == ord(TEST_STRING[curr_char_idx]) else ERROR_COLOUR
-                stdscr.attron(curses.color_pair(colour_profile))
-                stdscr.addstr(y, x, TEST_STRING[curr_char_idx])
-                stdscr.attroff(curses.color_pair(colour_profile))
-            else:
+            if curr_char_idx >= TEST_STRING_LENGTH - 1:
                 sys.exit()
+
+            colour_profile = CORRECT_COLOUR if key == ord(TEST_STRING[curr_char_idx]) else ERROR_COLOUR
+
+            stdscr.attron(curses.color_pair(colour_profile))
+            y, x = stdscr.getyx()
+            stdscr.addstr(y, x, TEST_STRING[curr_char_idx])
+            stdscr.attroff(curses.color_pair(colour_profile))
 
             curr_char_idx += 1
             stdscr.move(2, curr_char_idx)
