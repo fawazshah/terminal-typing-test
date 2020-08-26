@@ -11,6 +11,7 @@ ERROR_COLOUR = 2
 TEST_STRING = "Type these words"
 TEST_STRING_LENGTH = len(TEST_STRING)
 
+
 def main(stdscr):
     stdscr.addstr(0, 0, "Welcome to Typing Test! Press Ctrl-C to quit.")
     stdscr.addstr(2, 0, TEST_STRING)
@@ -43,7 +44,6 @@ def main(stdscr):
                 stdscr.attroff(curses.color_pair(colour_profile))
             else:
                 sys.exit()
-
 
             curr_char_idx += 1
             stdscr.move(2, curr_char_idx)
