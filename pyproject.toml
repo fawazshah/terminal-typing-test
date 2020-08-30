@@ -3,6 +3,7 @@ name = "terminal-typing-test"
 version = "0.1.0"
 description = "A Terminal-based typing test."
 authors = ["Fawaz Shah <fawaz010@gmail.com>"]
+readme = "README.md"
 license = "MIT"
 
 [tool.poetry.dependencies]
