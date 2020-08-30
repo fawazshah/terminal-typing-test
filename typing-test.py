@@ -3,8 +3,8 @@ import time
 import sys
 
 from results import Results
+from utils import print_time, print_char, wait_for_enter_pressed
 
-ENTER_KEYS = {10, 13}
 ESCAPE = 27
 BACKSPACE_KEYS = {8, 127}
 
@@ -14,26 +14,6 @@ ERROR_COLOUR = 2
 with open("text/stocks-short.txt") as f:
     TEST_STRING = f.read()
     TEST_STRING_LENGTH = len(TEST_STRING)
-
-
-def print_char(scr, char, colour_profile):
-    scr.attron(curses.color_pair(colour_profile))
-    y, x = scr.getyx()
-    scr.addstr(y, x, char)
-    scr.attroff(curses.color_pair(colour_profile))
-
-
-def wait_for_enter_pressed(scr):
-    scr.nodelay(False)
-    key = None
-    while key not in ENTER_KEYS:
-        key = scr.getch()
-    return
-
-
-def print_time(scr, row, start_time, reset_cursor_pos):
-    scr.addstr(row, 0, f"Time taken: {round(time.time() - start_time, 0)}s")
-    scr.move(4, reset_cursor_pos)
 
 
 def main(stdscr):
