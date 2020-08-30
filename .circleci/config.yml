@@ -11,27 +11,23 @@ jobs:
       - run:
           command: poetry build
           name: Build
-      - persist_to_workspace:
-          root: ~/project/
-          paths: dist
-  publish:
+  build-and-publish:
     executor: python/default
     steps:
       - checkout
-      - attach_workspace:
-          at: ~/project/dist/
       - run:
           command:  poetry config repositories.testpypi https://test.pypi.org/legacy/ &&
-                    poetry publish -r testpypi -u $PYPI_USERNAME -p $PYPI_PASSWORD
-          name: Publish To Test PyPI
+                    poetry publish -r testpypi -u $PYPI_USERNAME -p $PYPI_PASSWORD --build
+          name: Build & Publish To Test PyPI
 
 workflows:
   main:
     jobs:
-      - build
-      - publish:
-          requires:
-            - build
+      - build:
+          filters:
+            branches:
+              ignore: master
+      - build-and-publish:
           filters:
             branches:
               only: master
