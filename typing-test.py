@@ -2,6 +2,8 @@ import curses
 import time
 import sys
 
+from results import Results
+
 ENTER_KEYS = {10, 13}
 ESCAPE = 27
 BACKSPACE_KEYS = {8, 127}
@@ -40,9 +42,7 @@ def main(stdscr):
 
     curr_char_idx = 0
 
-    num_words_typed = 1
-
-    start_time = time.time()
+    results = Results(num_words_typed=1, start_time=time.time())
 
     while True:
         try:
@@ -59,18 +59,15 @@ def main(stdscr):
         else:
             if curr_char_idx < TEST_STRING_LENGTH - 1:
                 if TEST_STRING[curr_char_idx] == " ":
-                    num_words_typed += 1
+                    results.num_words_typed += 1
                 colour_profile = CORRECT_COLOUR if key == ord(TEST_STRING[curr_char_idx]) else ERROR_COLOUR
                 print_char(stdscr, TEST_STRING[curr_char_idx], colour_profile)
                 curr_char_idx += 1
                 stdscr.move(2, curr_char_idx)
             else:
-                end_time = time.time()
-                time_taken = end_time - start_time
+                results.end_time = time.time()
                 stdscr.clear()
-                stdscr.addstr(0, 0, f"Your time is {round(time_taken, 3)}.")
-                stdscr.addstr(1, 0, f"Your number of words typed is {num_words_typed}.")
-                stdscr.addstr(2, 0, f"Your WPM is {round(num_words_typed / time_taken * 60, 3)}. Press Enter to quit.")
+                results.print_results(stdscr, row=0)
                 wait_for_enter_pressed(stdscr)
                 break
 
