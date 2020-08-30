@@ -8,6 +8,6 @@ class Results:
     def print_results(self, scr, row):
         time_taken = self.end_time - self.start_time
         wpm = self.num_words_typed / time_taken * 60
-        scr.addstr(row, 0, f"Your time is {round(time_taken, 3)}.")
-        scr.addstr(row + 1, 0, f"Your number of words typed is {self.num_words_typed}.")
-        scr.addstr(row + 2, 0, f"Your WPM is {round(wpm, 3)}. Press Enter to quit.")
+        scr.addstr(row, 0, f"Time taken: {round(time_taken, 3)}.")
+        scr.addstr(row + 1, 0, f"Number of words typed: {self.num_words_typed}.")
+        scr.addstr(row + 2, 0, f"Your WPM is {round(wpm, 1)}. Press Enter to quit.")
