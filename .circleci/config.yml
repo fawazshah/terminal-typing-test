@@ -17,9 +17,9 @@ jobs:
   publish:
     executor: python/default
     steps:
+      - checkout
       - attach_workspace:
           at: ~/project/dist/
-      - checkout
       - run:
           command:  poetry config repositories.testpypi https://test.pypi.org/legacy/ &&
                     poetry publish -r testpypi -u $PYPI_USERNAME -p $PYPI_PASSWORD
