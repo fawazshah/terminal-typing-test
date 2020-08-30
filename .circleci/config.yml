@@ -12,10 +12,7 @@ jobs:
           command: poetry build
           name: Build
       - persist_to_workspace:
-          root: workspace
-          paths:
-            - dist
-
+          root: dist
   publish:
     executor: python/default
     steps:
