@@ -1,6 +1,6 @@
 import curses
-import time
 import sys
+import time
 
 from terminal_typing_test.monitor import Monitor
 from terminal_typing_test.utils import print_time, print_char, wait_for_enter_pressed
@@ -12,7 +12,7 @@ CORRECT_COLOUR = 1
 ERROR_COLOUR = 2
 RESET_COLOUR = 3
 
-with open("text/stocks-short.txt") as f:
+with open("terminal_typing_test/text/stocks-short.txt") as f:
     TEST_STRING = f.read()
     TEST_STRING_LENGTH = len(TEST_STRING)
 
@@ -62,7 +62,6 @@ def main(stdscr):
                 monitor.print_results(stdscr, row=0)
                 wait_for_enter_pressed(stdscr)
                 break
-
 
 def run():
     curses.wrapper(main)
