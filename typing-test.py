@@ -18,18 +18,17 @@ with open("text/stocks-short.txt") as f:
 
 
 def main(stdscr):
+    curses.use_default_colors()
     curses.init_pair(CORRECT_COLOUR, curses.COLOR_BLACK, curses.COLOR_GREEN)
     curses.init_pair(ERROR_COLOUR, curses.COLOR_BLACK, curses.COLOR_RED)
-    curses.init_pair(RESET_COLOUR, curses.COLOR_BLACK, curses.COLOR_WHITE)
+    curses.init_pair(RESET_COLOUR, -1, -1)
     stdscr.nodelay(True)
 
+    monitor = Monitor(1, time.time())
     curr_char_idx = 0
 
     stdscr.addstr(0, 0, "Welcome to Typing Test! Press Ctrl-C to quit.")
     stdscr.addstr(4, 0, TEST_STRING)
-
-    monitor = Monitor(1, time.time())
-
     stdscr.move(4, 0)
 
     while True:
