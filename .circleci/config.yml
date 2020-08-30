@@ -19,7 +19,7 @@ jobs:
   publish:
     executor: python/default
     steps:
-      - attach-workspace:
+      - attach_workspace:
           at: /tmp/workspace
       - checkout
       - run:
