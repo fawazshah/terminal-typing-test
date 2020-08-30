@@ -21,6 +21,7 @@ jobs:
           name: Publish To Test PyPI
 
 workflows:
+  version: 2
   main:
     jobs:
       - build
