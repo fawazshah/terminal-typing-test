@@ -12,13 +12,13 @@ jobs:
           command: poetry build
           name: Build
       - persist_to_workspace:
-          root: ~/
-          paths: project/dist
+          root: ~/project/
+          paths: dist
   publish:
     executor: python/default
     steps:
       - attach_workspace:
-          at: ~/
+          at: ~/project/dist/
       - checkout
       - run:
           command:  poetry config repositories.testpypi https://test.pypi.org/legacy/ &&
