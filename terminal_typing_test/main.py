@@ -1,4 +1,5 @@
 import curses
+import os
 import sys
 import time
 
@@ -12,7 +13,9 @@ CORRECT_COLOUR = 1
 ERROR_COLOUR = 2
 RESET_COLOUR = 3
 
-with open("terminal_typing_test/text/stocks-short.txt") as f:
+filepath = os.path.join(os.path.dirname(__file__), 'text/stocks-short.txt')
+
+with open(filepath) as f:
     TEST_STRING = f.read()
     TEST_STRING_LENGTH = len(TEST_STRING)
 
