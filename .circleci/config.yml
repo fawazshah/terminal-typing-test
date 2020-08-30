@@ -16,9 +16,8 @@ jobs:
     steps:
       - checkout
       - run:
-          command:  poetry config repositories.testpypi https://test.pypi.org/legacy/ &&
-                    poetry publish -r testpypi -u $PYPI_USERNAME -p $PYPI_PASSWORD --build
-          name: Build & Publish To Test PyPI
+          command: poetry publish -u $PYPI_USERNAME -p $PYPI_PASSWORD --build
+          name: Build & Publish To PyPI
 
 workflows:
   main:
