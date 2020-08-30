@@ -1,4 +1,4 @@
-from utils import TIME_DP
+from terminal_typing_test.utils import TIME_DP
 
 
 class Monitor:

@@ -2,8 +2,8 @@ import curses
 import time
 import sys
 
-from monitor import Monitor
-from utils import print_time, print_char, wait_for_enter_pressed
+from terminal_typing_test.monitor import Monitor
+from terminal_typing_test.utils import print_time, print_char, wait_for_enter_pressed
 
 ESCAPE = 27
 BACKSPACE_KEYS = {8, 127}
