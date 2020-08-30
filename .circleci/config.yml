@@ -21,11 +21,10 @@ jobs:
           name: Publish To Test PyPI
 
 workflows:
-  version: 2
   main:
     jobs:
       - build
-      - publish
+      - publish:
           filters:
             branches:
               only: master
