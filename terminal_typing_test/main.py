@@ -4,7 +4,7 @@ import sys
 import time
 
 from terminal_typing_test.monitor import Monitor
-from terminal_typing_test.utils import print_time, print_char, wait_for_enter_pressed
+from terminal_typing_test.utils import move_forward, move_back, print_time, print_char, wait_for_enter_pressed
 
 ESCAPE = 27
 BACKSPACE_KEYS = {8, 127}
@@ -13,7 +13,7 @@ CORRECT_COLOUR = 1
 ERROR_COLOUR = 2
 RESET_COLOUR = 3
 
-filepath = os.path.join(os.path.dirname(__file__), 'text/stocks-short.txt')
+filepath = os.path.join(os.path.dirname(__file__), "text/stocks-short.txt")
 
 with open(filepath) as f:
     TEST_STRING = f.read()
@@ -31,13 +31,14 @@ def main(stdscr):
     curr_char_idx = 0
 
     stdscr.addstr(0, 0, "Welcome to Typing Test! Press Ctrl-C to quit.")
-    stdscr.addstr(4, 0, TEST_STRING)
-    stdscr.move(4, 0)
+    stdscr.addstr(4, 0, "Type the following:")
+    stdscr.addstr(5, 0, TEST_STRING)
+    stdscr.move(5, 0)
 
     while True:
         try:
             key = stdscr.getch()
-            print_time(stdscr, 2, monitor.start_time, curr_char_idx)
+            print_time(stdscr, 2, monitor.start_time)
         except KeyboardInterrupt:
             sys.exit()
 
@@ -46,11 +47,10 @@ def main(stdscr):
         elif key == ESCAPE:
             break
         elif key in BACKSPACE_KEYS:
-            y, x = stdscr.getyx()
-            if x > 0:
+            if curr_char_idx > 0:
                 print_char(stdscr, TEST_STRING[curr_char_idx], RESET_COLOUR)
                 curr_char_idx -= 1
-                stdscr.move(4, curr_char_idx)
+                move_back(stdscr)
         else:
             if curr_char_idx < TEST_STRING_LENGTH - 1:
                 if TEST_STRING[curr_char_idx] == " ":
@@ -58,13 +58,14 @@ def main(stdscr):
                 colour_profile = CORRECT_COLOUR if key == ord(TEST_STRING[curr_char_idx]) else ERROR_COLOUR
                 print_char(stdscr, TEST_STRING[curr_char_idx], colour_profile)
                 curr_char_idx += 1
-                stdscr.move(4, curr_char_idx)
+                move_forward(stdscr)
             else:
                 monitor.end_time = time.time()
                 stdscr.clear()
                 monitor.print_results(stdscr, row=0)
                 wait_for_enter_pressed(stdscr)
                 break
+
 
 def run():
     curses.wrapper(main)
