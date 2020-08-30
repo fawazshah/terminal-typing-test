@@ -4,13 +4,17 @@ orbs:
   python: circleci/python@0.2.1
 
 jobs:
-  build-and-publish:
+  build:
     executor: python/default
     steps:
       - checkout
       - run:
           command: poetry build
           name: Build
+  publish:
+    executor: python/default
+    steps:
+      - checkout
       - run:
           command:  poetry config repositories.testpypi https://test.pypi.org/legacy/ &&
                     poetry publish -r testpypi -u $PYPI_USERNAME -p $PYPI_PASSWORD
@@ -19,4 +23,8 @@ jobs:
 workflows:
   main:
     jobs:
-      - build-and-publish
+      - build
+      - publish
+          filters:
+            branches:
+              only: master
