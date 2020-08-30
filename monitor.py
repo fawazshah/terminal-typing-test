@@ -1,7 +1,7 @@
 from utils import TIME_DP
 
 
-class Results:
+class Monitor:
     def __init__(self, num_words_typed, start_time):
         self.num_words_typed = num_words_typed
         self.start_time = start_time
