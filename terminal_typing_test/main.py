@@ -1,5 +1,6 @@
 import curses
 import os
+import random
 import sys
 import time
 
@@ -13,9 +14,9 @@ CORRECT_COLOUR = 1
 ERROR_COLOUR = 2
 RESET_COLOUR = 3
 
-filepath = os.path.join(os.path.dirname(__file__), "text/stocks-short.txt")
-
-with open(filepath) as f:
+text_directory = os.path.join(os.path.dirname(__file__), "text/short/")
+file = random.choice(os.listdir(text_directory))
+with open(text_directory + file) as f:
     TEST_STRING = f.read()
     TEST_STRING_LENGTH = len(TEST_STRING)
 
