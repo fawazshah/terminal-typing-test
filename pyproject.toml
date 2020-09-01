@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "terminal-typing-test"
-version = "0.1.2"
+version = "0.1.3"
 description = "A terminal-based typing test."
 authors = ["Fawaz Shah <fawaz010@gmail.com>"]
 readme = "README.md"
