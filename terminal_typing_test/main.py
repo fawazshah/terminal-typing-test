@@ -8,7 +8,7 @@ from terminal_typing_test.monitor import Monitor
 from terminal_typing_test.utils import move_forward, move_back, print_time, print_char, wait_for_enter_pressed
 
 ESCAPE = 27
-BACKSPACE_KEYS = {8, 127}
+BACKSPACE_KEYS = {8, 127, 263}
 
 CORRECT_COLOUR = 1
 ERROR_COLOUR = 2
