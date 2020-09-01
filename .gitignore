@@ -2,5 +2,6 @@ venv/
 .idea/
 __pycache__/
 dist/
+.vscode/
 
 .DS_Store
